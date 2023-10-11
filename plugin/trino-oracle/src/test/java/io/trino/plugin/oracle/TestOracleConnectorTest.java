@@ -21,7 +21,6 @@ import io.trino.testing.sql.TestTable;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-import static io.trino.plugin.jdbc.DefaultJdbcMetadata.DEFAULT_COLUMN_ALIAS_LENGTH;
 import static io.trino.plugin.oracle.TestingOracleServer.TEST_PASS;
 import static io.trino.plugin.oracle.TestingOracleServer.TEST_SCHEMA;
 import static io.trino.plugin.oracle.TestingOracleServer.TEST_USER;
@@ -33,7 +32,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TestOracleConnectorTest
         extends BaseOracleConnectorTest
 {
-    private static final String MAXIMUM_LENGTH_COLUMN_IDENTIFIER = "z".repeat(DEFAULT_COLUMN_ALIAS_LENGTH);
+    // older Oracle versions are limited to 30 character identifier names
+    private static final String MAXIMUM_LENGTH_COLUMN_IDENTIFIER = "z".repeat(30);
 
     private TestingOracleServer oracleServer;
 
