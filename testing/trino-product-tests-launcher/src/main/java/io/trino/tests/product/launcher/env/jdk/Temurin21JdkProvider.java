@@ -17,14 +17,13 @@ import com.google.inject.Inject;
 import io.trino.testing.containers.TestContainers;
 import io.trino.tests.product.launcher.env.EnvironmentOptions;
 
-public class Temurin21RcJdkProvider
+public class Temurin21JdkProvider
         extends TarDownloadingJdkProvider
 {
-    // build 35 is considered the first release candidate per https://mail.openjdk.org/pipermail/jdk-dev/2023-August/008059.html
-    private static final String VERSION = "21-35-ea-beta";
+    private static final String VERSION = "21-35";
 
     @Inject
-    public Temurin21RcJdkProvider(EnvironmentOptions environmentOptions)
+    public Temurin21JdkProvider(EnvironmentOptions environmentOptions)
     {
         super(environmentOptions);
     }
@@ -33,9 +32,9 @@ public class Temurin21RcJdkProvider
     protected String getDownloadUri(TestContainers.DockerArchitecture architecture)
     {
         return switch (architecture) {
-            case AMD64 -> "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-%s/OpenJDK21U-jdk_x64_linux_hotspot_ea_21-0-35.tar.gz".formatted(VERSION.replaceFirst("-", "%2B"));
-            case ARM64 -> "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-%s/OpenJDK21U-jdk_aarch64_linux_hotspot_ea_21-0-35.tar.gz".formatted(VERSION.replaceFirst("-", "%2B"));
-            default -> throw new IllegalArgumentException("Architecture %s is not supported for Temurin 21-ea-beta distribution".formatted(architecture));
+            case AMD64 -> "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-%s/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz".formatted(VERSION.replaceFirst("-", "%2B"));
+            case ARM64 -> "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-%s/OpenJDK21U-jdk_aarch64_linux_hotspot_21_35.tar.gz".formatted(VERSION.replaceFirst("-", "%2B"));
+            default -> throw new IllegalArgumentException("Architecture %s is not supported for Eclipse Temurin %s distribution".formatted(architecture, VERSION));
         };
     }
 
