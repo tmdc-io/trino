@@ -57,8 +57,8 @@ if [ "$java_found" = false ]; then
 +----------------------------------------------------------------------+
 | Please install JDK 21. On RHEL/CentOS, use java-21-openjdk-devel.    |
 |                                                                      |
-| You can also download an OpenJDK 21 build, such as Zulu Community:   |
-|       >>> https://www.azul.com/downloads/zulu-community/ <<<         |
+| You can also download an OpenJDK 21 build, such as Eclipse Temurin:  |
+|                     >>> https://adoptium.net/ <<<                    |
 |                                                                      |
 | NOTE: This script will attempt to find Java whether you install      |
 |       using the binary or the RPM based installer.                   |
