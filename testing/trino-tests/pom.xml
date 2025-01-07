@@ -186,6 +186,12 @@
             <groupId>io.trino</groupId>
             <artifactId>trino-hive</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.github.luben</groupId>
+                    <artifactId>zstd-jni</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

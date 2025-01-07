@@ -209,7 +209,7 @@
         <dep.parquet.version>1.15.0</dep.parquet.version>
         <dep.plugin.failsafe.version>${dep.plugin.surefire.version}</dep.plugin.failsafe.version>
         <dep.protobuf.version>3.25.5</dep.protobuf.version>
-        <dep.snowflake.version>3.19.1</dep.snowflake.version>
+        <dep.snowflake.version>3.20.0</dep.snowflake.version>
         <dep.swagger.version>2.2.27</dep.swagger.version>
         <dep.takari.version>2.2.0</dep.takari.version>
         <dep.tcnative.version>2.0.69.Final</dep.tcnative.version>
@@ -223,6 +223,7 @@
         Since 1.1.0, the default behaviour for such conflicts changed from overwriting the artifact to failing the build.
         -->
         <provisio.fallbackTargetFileNameMode>GA</provisio.fallbackTargetFileNameMode>
+        <dep.logback.version>1.5.13</dep.logback.version>
     </properties>
 
     <dependencyManagement>
@@ -463,6 +464,12 @@
                 <artifactId>clickhouse-jdbc</artifactId>
                 <version>0.6.3</version>
                 <classifier>all</classifier>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.squareup.okio</groupId>
+                        <artifactId>okio</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
@@ -2747,6 +2754,13 @@
                                 </resources>
                             </exception>
                         </exceptions>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <configuration>
+                        <skip>true</skip>
                     </configuration>
                 </plugin>
             </plugins>
