@@ -1008,4 +1008,22 @@ public class RedshiftClient
     {
         return (statement, index, value) -> statement.unwrap(RedshiftPreparedStatement.class).setVarbyte(index, value.getBytes());
     }
+
+    @Override
+    public ResultSet getTables(Connection connection, Optional<String> remoteSchemaName, Optional<String> remoteTableName)
+            throws SQLException
+    {
+        // this method is called by IdentifierMapping, so cannot use IdentifierMapping here as this would cause an endless loop
+        DatabaseMetaData metadata = connection.getMetaData();
+        return metadata.getTables(
+                connection.getCatalog(),
+                escapeObjectNameForMetadataQuery(remoteSchemaName, metadata.getSearchStringEscape()).orElse(null),
+                escapeObjectNameForMetadataQuery(remoteTableName, metadata.getSearchStringEscape()).orElse(null),
+                getTableTypes().map(types -> types.toArray(String[]::new)).orElse(null));
+    }
+
+    protected Optional<List<String>> getTableTypes()
+    {
+        return Optional.empty();
+    }
 }
